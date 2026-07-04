@@ -2,10 +2,15 @@ docker image name = test
 docker image tag = pandas
 
 build the docker file using the name and tag test:pandas
+
 if you use the same tag when building a new docker image with the same name, the new name:tag will go to the new docker image
+
 and leave the previous one untagged, untagged docker image is known as dangling images
+
 use "docker image prune" to remove dangling (untagged) images
+
 tags in docker image is used for organisation purposes
+
 properly organised docker images and removing untagged images helps save cost and space
 
 *this does not affect other teammates because the docker image we are currently doing is local to each Docker installation*
