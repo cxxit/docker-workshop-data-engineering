@@ -17,17 +17,17 @@ properly organised docker images and removing untagged images helps save cost an
 
 
 ### Scenario 2: 
-    # shared image registry 
-    # you and your team uses a registery Docker Hub or private registry
-    # images are shared by pushing and pulling, not by building 
-    # Computer A: build docker image mycompany/test:pandas 
-    # Computer B: docker pull mycompany/test:pandas
-    # Computer B: runs the docker image, this is the exact docker image that Computer A created 
-    # dangling images still exists if either Computer A or B creates a new docker image with the same tag and name
+    - shared image registry 
+    - you and your team uses a registery Docker Hub or private registry
+    - images are shared by pushing and pulling, not by building 
+    - Computer A: build docker image mycompany/test:pandas 
+    - Computer B: docker pull mycompany/test:pandas
+    - Computer B: runs the docker image, this is the exact docker image that Computer A created 
+    - dangling images still exists if either Computer A or B creates a new docker image with the same tag and name
 
 ### by using uv (VM) with docker 
-    # solve OS environment issues
-    # solves python version, and system libraries issues 
-    # have same runtime everywhere 
-    # while uv solves fast dependency installation, dependency resolution and lockfile-based reproducibility
-    # uv build speed, conssitency of dependency versions and caching efficiency 
+    - solve OS environment issues
+    - solves python version, and system libraries issues 
+    - have same runtime everywhere 
+    - while uv solves fast dependency installation, dependency resolution and lockfile-based reproducibility
+    - uv build speed, conssitency of dependency versions and caching efficiency 
