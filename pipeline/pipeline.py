@@ -13,7 +13,7 @@ print(df.head())
 print(f"Running pipeline for day {day}")
 # save this data frame to a Parquet file 
 # a parquet file is a fast, compressed column-based data format used a lot in data eningeering
-df.to_parquet(f"output_day_{sys.argv[1]}.parquet") 
+df.to_parquet(f"output_day_{day}.parquet") 
 
 # to read the parquet file 
 read_parquet_df = pd.read_parquet("output_day_12.parquet")
