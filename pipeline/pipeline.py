@@ -15,6 +15,13 @@ print(f"Running pipeline for day {day}")
 # a parquet file is a fast, compressed column-based data format used a lot in data eningeering
 df.to_parquet(f"output_day_{day}.parquet") 
 
+'''
+Download uv (virtual machine)
+download PyArrow in uv
+- VM gives a clean, isolated environment
+'''
+
+
 # to read the parquet file 
-read_parquet_df = pd.read_parquet("output_day_12.parquet")
-print(read_parquet_df.head())
+# read_parquet_df = pd.read_parquet("output_day_12.parquet")
+# print(read_parquet_df.head())
