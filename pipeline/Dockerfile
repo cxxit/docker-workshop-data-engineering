@@ -2,16 +2,22 @@
 # (slim) a smaller Docker image with fewer pre-installed system packages (smaller size)
 FROM python:3.13.11-slim
 
-RUN pip install pandas pyarrow 
+# Copy uv binary from official uv image (multi-stage build pattern)
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
 
 WORKDIR /code
+ENV PATH="/code/.venv/bin:$PATH"
 
+COPY pyproject.toml .python-version uv.lock ./
+# RUN uv sync --locked download dependencies from the uv.lock file, the dependencies we have installed in the uv.lock is the same as our virtual env
+RUN uv sync --locked
 # copy the file pipeline.py in the current folder into the current working directory in Docker Container
 COPY pipeline.py . 
 
 
 # entrypoint makes it faster
-ENTRYPOINT [ "python", "pipeline.py" ] 
+# ENTRYPOINT ["uv", "run", "python", "pipeline.py" ] 
+ENTRYPOINT ["python", "pipeline.py" ] 
 
 
 # docker image name = test
@@ -37,3 +43,9 @@ ENTRYPOINT [ "python", "pipeline.py" ]
     # Computer B: runs the docker image, this is the exact docker image that Computer A created 
     # dangling images still exists if either Computer A or B creates a new docker image with the same tag and name
 
+# by using uv (VM) with docker 
+    # solve OS environment issues
+    # solves python version, and system libraries issues 
+    # have same runtime everywhere 
+    # while uv solves fast dependency installation, dependency resolution and lockfile-based reproducibility
+    # uv build speed, conssitency of dependency versions and caching efficiency 
