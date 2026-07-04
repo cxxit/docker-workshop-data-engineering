@@ -25,3 +25,5 @@ download PyArrow in uv
 # to read the parquet file 
 # read_parquet_df = pd.read_parquet("output_day_12.parquet")
 # print(read_parquet_df.head())
+
+# uv advantage is it downloads libraries super fast (uv is developed on Rust)
