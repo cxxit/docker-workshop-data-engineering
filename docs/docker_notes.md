@@ -82,3 +82,20 @@ docker build -t taxi_ingest:v001 .
 - Automatic network creation
 - Easy configuration management
 - Declarative infrastructure
+
+
+```md
+## ❌ When you WOULD rebuild the image
+
+You only need to rebuild the Docker image if you change the **build definition or application code**, such as:
+
+- ingestion logic (`ingest_data.py`)
+- dependencies (`pyproject.toml`)
+- Dockerfile itself
+
+### Example cases where rebuild is required:
+
+- Switching from CSV ingestion → API ingestion
+- Adding new tools or frameworks (e.g., Spark, Airflow client, etc.)
+- Changing transformation or schema logic inside the pipeline
+```
