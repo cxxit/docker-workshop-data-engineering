@@ -74,3 +74,11 @@ docker build -t taxi_ingest:v001 .
 
 ![create docker network](image.png)
     - things within the same network can see each other
+
+
+## Benefits of Docker Compose
+
+- Single command to start all services
+- Automatic network creation
+- Easy configuration management
+- Declarative infrastructure
