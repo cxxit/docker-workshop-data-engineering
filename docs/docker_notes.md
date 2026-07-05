@@ -45,3 +45,32 @@ properly organised docker images and removing untagged images helps save cost an
     - Faster image builds because dependency installation is quicker
     - Reproducible builds because uv.lock pins exact versions
     - The same dependency management workflow locally and in Docker
+
+
+#### Why containerize the ingestion script 
+    - so the ingestion pipeline runs in a fully controlled, identical environment everywhere 
+        - python version, librarise, system dependencies, file paths, runtime behaviour 
+    - solves the "it works on my laptop but breaks on yours" save team time to figure out what is different and what is breaking the program in his/her pc 
+    - Docker container allows the program to run exactly the same everywhere 
+        - by setting up the same Dockerfile, and running the same Docker image, inside the docker image the dependencies libraries and python version are the same as per denoted in the Dockerfile 
+        - when executing programs in the docker container, results would be the same
+
+docker build -t taxi_ingest:v001 . 
+    - name of docker image: taxi_ingest
+    - tag of taxi_image: v001 
+    - copy ingest_data.py from the build context (local folder used during docker build) into the Docker image
+
+    Your machine folder (build context)
+    ├── Dockerfile
+    ├── ingest_data.py  ← copied
+    ├── uv.lock
+    └── pyproject.toml
+            ↓
+        docker build
+            ↓
+    Docker image (/code inside container)
+        ├── ingest_data.py
+        ├── installed dependencies
+
+![create docker network](image.png)
+    - things within the same network can see each other
