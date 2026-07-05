@@ -3,6 +3,10 @@
 # Base image: lightweight Python runtime
 FROM python:3.13.11-slim
 
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy uv binary from official uv image (multi-stage build pattern)
 # This allows us to use uv to create a virtual environment and install dependencies.
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/ 
@@ -29,11 +33,11 @@ RUN uv sync --locked
 
 # copy the file pipeline.py in the current folder into the current working directory in Docker Container
 # Copy application code into container
-COPY pipeline.py . 
+COPY ingest_data.py . 
 
 # entrypoint makes it faster
 # ENTRYPOINT ["uv", "run", "python", "pipeline.py" ]
 # Run the script when container starts 
-ENTRYPOINT ["python", "pipeline.py" ] 
+ENTRYPOINT ["python", "ingest_data.py" ] 
 
 
