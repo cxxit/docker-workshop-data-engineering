@@ -31,3 +31,17 @@ properly organised docker images and removing untagged images helps save cost an
     - have same runtime everywhere 
     - while uv solves fast dependency installation, dependency resolution and lockfile-based reproducibility
     - uv build speed, conssitency of dependency versions and caching efficiency 
+
+
+### Why use the Docker container as the PostgreSQL server
+#### Use cases of UV
+    - uv is designed to be a fast Python package and project manager
+    - Download packages much faster (parallel downloads and an efficient implementation)
+    - Resolve dependencies faster 
+    - Create virtual environments quickly
+    - Reuse a global package caache so the same package isn't downloaded repeatedly
+
+#### Advantage of using uv with Docker 
+    - Faster image builds because dependency installation is quicker
+    - Reproducible builds because uv.lock pins exact versions
+    - The same dependency management workflow locally and in Docker
